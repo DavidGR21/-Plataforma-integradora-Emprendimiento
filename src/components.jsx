@@ -101,32 +101,55 @@ export function Section({ id, title, lead, source, children }) {
         <h2 id={id + '-t'}>{title}</h2>
         {lead && <p className="sec__lead">{lead}</p>}
       </header>
-      {enlaces[id] && <LinkStrip ids={enlaces[id]} label={`Enlaces oficiales: ${title}`} />}
       {children}
       {source && <p className="src">Fuente: {source}</p>}
+      {enlaces[id] && <SectionLinks ids={enlaces[id]} title={title} />}
     </section>
   )
 }
 
 /* ── Enlaces externos ─────────────────────────────── */
 const HOT = ['Calculadora', 'Sistema', 'Encuesta']
-export function LinkStrip({ ids, label }) {
+// Lista compacta de enlaces: texto, entidad en gris y marca para calculadoras/sistemas
+export function LinkList({ ids, showEnt = true }) {
   return (
-    <nav className="lstrip" aria-label={label}>
-      <span className="lstrip__label">Enlaces oficiales</span>
-      <ul>
-        {ids.map((k) => {
-          const l = links[k]
-          return (
-            <li key={k}>
-              <a href={l.u} target="_blank" rel="noreferrer" className={`chip chip--${HOT.includes(l.tipo) ? 'hot' : 'std'}`} title={`${l.t} (${l.e}). Se abre en otra pestaña`}>
-                <span className="chip__ent">{l.e}</span>{l.t}<span className="chip__arrow" aria-hidden="true">↗</span>
-              </a>
-            </li>
-          )
-        })}
-      </ul>
-    </nav>
+    <ul className="llist">
+      {ids.map((k) => {
+        const l = links[k]
+        return (
+          <li key={k}>
+            <a href={l.u} target="_blank" rel="noreferrer" className={HOT.includes(l.tipo) ? 'is-hot' : ''}>
+              {l.t}<span className="sr"> (se abre en otra pestaña)</span><span aria-hidden="true"> ↗</span>
+            </a>
+            {showEnt && <span className="llist__ent">{HOT.includes(l.tipo) ? l.tipo : l.e}</span>}
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+// Enlaces al pie de un apartado
+export function SectionLinks({ ids, title }) {
+  return (
+    <aside className="slinks" aria-label={`Enlaces oficiales: ${title}`}>
+      <p className="slinks__label">Enlaces oficiales de este apartado</p>
+      <LinkList ids={ids} />
+    </aside>
+  )
+}
+
+// Enlaces agrupados en columnas: [[título, ids], ...]
+export function LinkGroups({ groups }) {
+  return (
+    <div className="lgroups">
+      {groups.map(([g, ids]) => (
+        <div key={g} className="lgroups__col">
+          <h3>{g}</h3>
+          <LinkList ids={ids} showEnt={false} />
+        </div>
+      ))}
+    </div>
   )
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Link, Routes, Route, useParams, useLocation, Navigate } from 'react-router-dom'
-import { curso, modulos, docs, m1, m2, m3, m4, links, enlaces, accesosRapidos, gruposEnlaces } from './data.js'
-import { ViewerProvider, DocCard, LinkCard, usd } from './components.jsx'
+import { curso, modulos, docs, m1, m2, m3, m4, links, enlaces, gruposEnlaces } from './data.js'
+import { ViewerProvider, DocCard, LinkCard, LinkGroups, usd } from './components.jsx'
 import { Modulo1, Modulo2, Modulo3, Modulo4 } from './modules.jsx'
 
 const VISTAS = { 1: Modulo1, 2: Modulo2, 3: Modulo3, 4: Modulo4 }
@@ -12,13 +12,20 @@ const SECCIONES = {
   4: [['formas', 'Formas de terminación'], ['calculos', 'Cálculo de liquidaciones'], ['pazysalvo', 'Paz y salvo (SIGEL)'], ['gamificacion', 'Gamificación']],
 }
 const ROMAN = ['I', 'II', 'III', 'IV']
-const QUICK_LABEL = {
-  sriLinea: 'SRI en línea', sriConsultaRuc: 'Consulta de RUC', calcLiquidacion: 'Calculadora de liquidaciones',
-  sut: 'SUT (Ministerio del Trabajo)', iessSistema: 'IESS empleadores', senadiServicios: 'SENADI marcas',
-}
 const totalEnlaces = Object.keys(links).length
 // Enlaces únicos de un módulo, en el orden de sus apartados
 const enlacesModulo = (id) => [...new Set(SECCIONES[id].flatMap(([sec]) => enlaces[sec] ?? []))]
+// Agrupa los enlaces de un módulo por entidad, en el orden en que aparecen
+const porEntidad = (ids) => {
+  const g = new Map()
+  ids.forEach((k) => g.set(links[k].e, [...(g.get(links[k].e) ?? []), k]))
+  return [...g]
+}
+const ACCESOS_INICIO = [
+  ['Calculadoras del Ministerio del Trabajo', ['calcLiquidacion', 'calcTercero', 'calcCuarto']],
+  ['SRI', ['sriConsultaRuc', 'sriLinea', 'sriFacturador']],
+  ['Trámites laborales y de marca', ['sut', 'iessSistema', 'senadiServicios']],
+]
 const HEADLINE = {
   1: [usd(m1.resultado.resultado), 'resultado mensual estimado'],
   2: [usd(m2.iva.pagar), 'IVA a pagar del semestre'],
@@ -52,16 +59,8 @@ function Masthead({ onMenu }) {
         <span>Proyecto integrador de fin de semestre</span>
         <span>{curso.asignatura}</span>
         <span>Ciclo {curso.ciclo.toLowerCase()}</span>
+        <Link to="/enlaces" className="mast__links">Enlaces oficiales</Link>
       </div>
-      <nav className="quick" aria-label="Accesos rápidos a sitios oficiales">
-        <span className="quick__label">Accesos rápidos</span>
-        {accesosRapidos.map((k) => (
-          <a key={k} href={links[k].u} target="_blank" rel="noreferrer" title={`${links[k].t} (${links[k].e})`}>
-            {QUICK_LABEL[k] ?? links[k].t} <span aria-hidden="true">↗</span>
-          </a>
-        ))}
-        <Link to="/enlaces" className="quick__all">Todos los enlaces</Link>
-      </nav>
     </header>
   )
 }
@@ -136,12 +135,12 @@ function Inicio() {
         </div>
       </section>
 
-      <section className="quickpanel quickpanel--home" aria-labelledby="accesos">
+      <section className="quickpanel" aria-labelledby="accesos">
         <header className="quickpanel__head">
-          <h2 id="accesos">Accesos rápidos</h2>
-          <p>Las calculadoras y trámites oficiales más usados. <Link to="/enlaces">Ver los {totalEnlaces} enlaces</Link>.</p>
+          <h2 id="accesos">Sitios oficiales más usados</h2>
+          <p>Cada módulo trae los suyos al pie de cada apartado. <Link to="/enlaces">Ver los {totalEnlaces} enlaces</Link>.</p>
         </header>
-        <div className="lgrid">{['calcLiquidacion', 'calcTercero', 'calcCuarto', 'sriConsultaRuc', 'sriLinea', 'sriFacturador', 'sut', 'iessSistema', 'senadiServicios'].map((k) => <LinkCard key={k} k={k} />)}</div>
+        <LinkGroups groups={ACCESOS_INICIO} />
       </section>
 
       <section className="team" aria-labelledby="equipo">
@@ -175,15 +174,8 @@ function Modulo() {
       <nav className="toc" aria-label="Secciones del módulo">
         {SECCIONES[m.id].map(([id, t]) => <a key={id} href={`#${id}`}>{t}</a>)}
         <a href="#trabajos">Documentos</a>
-        <a href="#enlaces-modulo" className="toc__links">Enlaces oficiales</a>
+        <a href="#enlaces-modulo">Enlaces oficiales</a>
       </nav>
-      <section className="quickpanel" id="enlaces-modulo" aria-labelledby="enlaces-modulo-t">
-        <header className="quickpanel__head">
-          <h2 id="enlaces-modulo-t">Accesos rápidos de este módulo</h2>
-          <p>Sitios oficiales, calculadoras y trámites usados en los trabajos. Cada apartado repite los suyos bajo su título.</p>
-        </header>
-        <div className="lgrid">{enlacesModulo(m.id).map((k) => <LinkCard key={k} k={k} />)}</div>
-      </section>
       <Vista />
       <section className="sec" id="trabajos" aria-labelledby="trabajos-t">
         <header className="sec__head">
@@ -191,6 +183,13 @@ function Modulo() {
           <p className="sec__lead">Documentos originales entregados durante el semestre. Ábralos aquí o descárguelos.</p>
         </header>
         <div className="docs">{m.docs.map((k) => <DocCard key={k} k={k} />)}</div>
+      </section>
+      <section className="sec" id="enlaces-modulo" aria-labelledby="enlaces-modulo-t">
+        <header className="sec__head">
+          <h2 id="enlaces-modulo-t">Enlaces oficiales del módulo</h2>
+          <p className="sec__lead">Resumen por entidad de los sitios citados en los apartados. <Link to="/enlaces">Ver el directorio completo</Link>.</p>
+        </header>
+        <LinkGroups groups={porEntidad(enlacesModulo(m.id))} />
       </section>
       <nav className="pager" aria-label="Navegación entre módulos">
         {prev ? <Link to={`/modulo/${prev.slug}`}>Anterior: {prev.nombre}</Link> : <Link to="/">Volver al inicio</Link>}

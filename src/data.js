@@ -390,9 +390,6 @@ export const enlaces = {
   gamificacion: ['mdtNormativa'],
 }
 
-// Accesos rápidos visibles en la cabecera de todas las páginas
-export const accesosRapidos = ['sriLinea', 'sriConsultaRuc', 'calcLiquidacion', 'sut', 'iessSistema', 'senadiServicios']
-
 // Grupos para la página de enlaces
 export const gruposEnlaces = [
   ['SRI: RUC, IVA y facturación', ['sriPortal', 'sriLinea', 'sriConsultaRuc', 'sriRucSoc', 'sriRucPN', 'sriRimpe', 'sriCatastros', 'sriDatos', 'sriIva', 'sriFormularios', 'sriCalendario', 'sriFE', 'sriFacturador', 'sriComprobantes', 'sriValidez', 'sriEmisores', 'sriGuia']],
