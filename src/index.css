@@ -356,3 +356,5 @@ tfoot th, tfoot td { font-weight: 600; background: #faf7f5; border-top: 2px soli
   .quick .quick__all { margin-left: 0; }
 }
 @media print { .quick, .lstrip, .quickpanel { display: none !important; } }
+.formcta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.formcta .muted { font-size: .88rem; }

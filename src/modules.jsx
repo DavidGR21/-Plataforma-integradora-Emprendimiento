@@ -37,7 +37,7 @@ export function Modulo1() {
       </Section>
 
       <Section id="plan" title="Plan empresarial" source={`Ficha de perfil estratégico; Taller de mercado y operación; ${SRC.pea1}`}
-        lead="Perfil estratégico, competencia y sondeo de mercado que integran el plan de negocios.">
+        lead="Perfil estratégico y análisis de la competencia que integran el plan de negocios.">
         <div className="grid2">
           <div className="statement"><h3>Misión</h3><p>{m1.mision}</p></div>
           <div className="statement"><h3>Visión</h3><p>{m1.vision}</p></div>
@@ -49,13 +49,30 @@ export function Modulo1() {
         </div>
         <Table caption="Estrategias derivadas del FODA" head={['Tipo', 'Estrategia']} rows={m1.estrategias} />
         <Table caption="Competencia y diferenciación" head={['Criterio', 'LearnPro', 'Superprof Ecuador', 'Preply']} rows={m1.competencia} />
-        <h3 className="sub">Encuesta de orientación (n = {m1.encuesta.n} estudiantes universitarios)</h3>
+      </Section>
+
+      <Section id="encuesta" title="Encuesta y entrevistas" source={`Encuesta de Orientación – LearnPro (Google Forms); ${SRC.pea1}`}
+        lead={`Para validar la idea, el equipo aplicó la Encuesta de Orientación de LearnPro a ${m1.encuesta.n} estudiantes universitarios. Sus resultados orientaron las materias, el formato y los horarios de la plataforma.`}>
+        <p className="formcta">
+          <a className="btn" href={m1.encuesta.formulario} target="_blank" rel="noreferrer">Abrir la encuesta en Google Forms ↗</a>
+          <span className="muted">Es el formulario original usado en las entrevistas.</span>
+        </p>
+        <Stats items={[
+          ['Estudiantes encuestados', String(m1.encuesta.n)],
+          ['Área más pedida', 'Programación', `${pct(m1.encuesta.areas[0][1])} de las respuestas`],
+          ['Formato preferido', 'Ejercicios prácticos', `${pct(m1.encuesta.formato[0][1])} de las respuestas`],
+          ['Horario preferido', 'Noche', `${pct(m1.encuesta.horario[0][1])}, de 18:00 a 22:00`],
+        ]} />
         <div className="grid2">
           <HBars title="Áreas de interés (respuesta múltiple)" data={m1.encuesta.areas} format={pct} max={100} unit="% de respuestas" />
           <HBars title="Formato de contenido preferido (respuesta múltiple)" data={m1.encuesta.formato} format={pct} max={100} unit="% de respuestas" />
           <HBars title="Horario preferido para estudiar" data={m1.encuesta.horario} format={pct} max={100} unit="% de respuestas" />
           <HBars title="Tiempo semanal que dedicarían" data={m1.encuesta.tiempo} format={pct} max={100} unit="% de respuestas" />
+          <HBars title="Nivel de experiencia declarado" data={m1.encuesta.experiencia} format={pct} max={100} unit="% de respuestas" />
         </div>
+        <h3 className="sub">Formulario de la encuesta</h3>
+        <AppWindow url={m1.encuesta.formulario.replace('usp=header', 'embedded=true')} title="Encuesta de Orientación – LearnPro"
+          note="Formulario de Google Forms usado en las entrevistas. Puede verse aquí, ampliarse o abrirse en otra pestaña." />
       </Section>
 
       <Section id="economico" title="Resultados económicos" source="Viabilidad financiera, plantilla automatizada del estudio económico"

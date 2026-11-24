@@ -108,6 +108,7 @@ export const m1 = {
   ],
   encuesta: {
     n: 25,
+    formulario: 'https://docs.google.com/forms/d/e/1FAIpQLSeaOX-teZWSaunpxZUj9-MKhvVug6WVmNRts0zL-25XtKMnNQ/viewform?usp=header',
     areas: [['Programación y desarrollo', 41.7], ['Idiomas', 29.2], ['Diseño gráfico', 29.2], ['Marketing digital', 29.2], ['Análisis de datos', 25], ['Gestión de proyectos', 20.8]],
     formato: [['Ejercicios prácticos e interactivos', 68], ['Videos cortos', 36], ['Clases en vivo', 32], ['Documentación escrita', 28], ['Podcasts o audiolibros', 8]],
     horario: [['Noche (18:00-22:00)', 40], ['Tarde (12:00-18:00)', 24], ['Madrugada (22:00+)', 20], ['Mañana (6:00-12:00)', 16]],
@@ -362,6 +363,7 @@ export const links = {
   cfn: { t: 'Corporación Financiera Nacional (créditos)', u: 'https://www.cfn.fin.ec', e: 'CFN', tipo: 'Portal' },
   banecuador: { t: 'BanEcuador (créditos para emprendedores)', u: 'https://www.banecuador.fin.ec', e: 'BanEcuador', tipo: 'Portal' },
   // Sistemas del equipo
+  encuesta: { t: 'Encuesta de Orientación – LearnPro (Google Forms)', u: 'https://docs.google.com/forms/d/e/1FAIpQLSeaOX-teZWSaunpxZUj9-MKhvVug6WVmNRts0zL-25XtKMnNQ/viewform?usp=header', e: 'Equipo LearnPro', tipo: 'Encuesta' },
   appRoles: { t: 'Sistema de roles de pago LearnPro', u: 'https://learnpro-roles-pago-ecuador.vercel.app/#/', e: 'Equipo LearnPro', tipo: 'Sistema' },
   appSigel: { t: 'SIGEL: paz y salvo y liquidación', u: 'https://frontend-nine-wine-16.vercel.app/', e: 'Equipo LearnPro', tipo: 'Sistema' },
 }
@@ -371,6 +373,7 @@ export const enlaces = {
   idea: ['inec', 'produccion'],
   modelo: ['canvas'],
   plan: ['superprof', 'preply', 'inec', 'superciasConsulta'],
+  encuesta: ['encuesta', 'inec'],
   economico: ['cfn', 'banecuador', 'supercias'],
   ruc: ['sriConsultaRuc', 'sriRucSoc', 'sriRucPN', 'sriRimpe', 'sriCatastros', 'sriDatos', 'sriLinea', 'superciasConsulta'],
   iva: ['sriLinea', 'sriIva', 'sriFormularios', 'sriCalendario', 'sriValidez', 'sriGuia'],
@@ -401,5 +404,5 @@ export const gruposEnlaces = [
   ['Comercio exterior e importaciones', ['ecuapass', 'senae', 'arcotel', 'arcsa', 'dgac', 'produccion']],
   ['Justicia laboral', ['esatje', 'funcionJudicial']],
   ['Emprendimiento y mercado', ['canvas', 'inec', 'cfn', 'banecuador', 'superprof', 'preply']],
-  ['Sistemas desarrollados por el equipo', ['appRoles', 'appSigel']],
+  ['Herramientas del equipo', ['encuesta', 'appRoles', 'appSigel']],
 ]

@@ -6,7 +6,7 @@ import { Modulo1, Modulo2, Modulo3, Modulo4 } from './modules.jsx'
 
 const VISTAS = { 1: Modulo1, 2: Modulo2, 3: Modulo3, 4: Modulo4 }
 const SECCIONES = {
-  1: [['idea', 'Idea de negocio'], ['modelo', 'Modelo de negocio'], ['plan', 'Plan empresarial'], ['economico', 'Resultados económicos']],
+  1: [['idea', 'Idea de negocio'], ['modelo', 'Modelo de negocio'], ['plan', 'Plan empresarial'], ['encuesta', 'Encuesta y entrevistas'], ['economico', 'Resultados económicos']],
   2: [['ruc', 'RUC y régimen'], ['iva', 'IVA y comprobantes'], ['documentos-tributarios', 'Facturación e importaciones'], ['marca', 'Registro de marca'], ['matriz', 'Matriz de obligaciones']],
   3: [['contratacion', 'Contratación y salarios'], ['horas', 'Horas extras'], ['beneficios', 'Beneficios sociales'], ['roles', 'Roles de pago']],
   4: [['formas', 'Formas de terminación'], ['calculos', 'Cálculo de liquidaciones'], ['pazysalvo', 'Paz y salvo (SIGEL)'], ['gamificacion', 'Gamificación']],

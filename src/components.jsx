@@ -109,6 +109,7 @@ export function Section({ id, title, lead, source, children }) {
 }
 
 /* ── Enlaces externos ─────────────────────────────── */
+const HOT = ['Calculadora', 'Sistema', 'Encuesta']
 export function LinkStrip({ ids, label }) {
   return (
     <nav className="lstrip" aria-label={label}>
@@ -118,7 +119,7 @@ export function LinkStrip({ ids, label }) {
           const l = links[k]
           return (
             <li key={k}>
-              <a href={l.u} target="_blank" rel="noreferrer" className={`chip chip--${l.tipo === 'Calculadora' || l.tipo === 'Sistema' ? 'hot' : 'std'}`} title={`${l.t} (${l.e}). Se abre en otra pestaña`}>
+              <a href={l.u} target="_blank" rel="noreferrer" className={`chip chip--${HOT.includes(l.tipo) ? 'hot' : 'std'}`} title={`${l.t} (${l.e}). Se abre en otra pestaña`}>
                 <span className="chip__ent">{l.e}</span>{l.t}<span className="chip__arrow" aria-hidden="true">↗</span>
               </a>
             </li>
@@ -133,7 +134,7 @@ export function LinkCard({ k }) {
   const l = links[k]
   const host = l.u.replace(/^https?:\/\//, '').replace(/\/.*$/, '')
   return (
-    <a className={`lcard ${l.tipo === 'Calculadora' || l.tipo === 'Sistema' ? 'lcard--hot' : ''}`} href={l.u} target="_blank" rel="noreferrer">
+    <a className={`lcard ${HOT.includes(l.tipo) ? 'lcard--hot' : ''}`} href={l.u} target="_blank" rel="noreferrer">
       <span className="lcard__top"><span className="lcard__tipo">{l.tipo}</span><span className="lcard__ent">{l.e}</span></span>
       <span className="lcard__t">{l.t}</span>
       <span className="lcard__host">{host} <span aria-hidden="true">↗</span><span className="sr"> (se abre en otra pestaña)</span></span>
