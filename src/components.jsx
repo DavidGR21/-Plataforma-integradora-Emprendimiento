@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
-import { docs } from './data.js'
+import { docs, links, enlaces } from './data.js'
 
 export const usd = (v, dec = 2) =>
   (v < 0 ? '−' : '') + 'USD ' + Math.abs(v).toLocaleString('es-EC', { minimumFractionDigits: dec, maximumFractionDigits: dec })
@@ -101,9 +101,43 @@ export function Section({ id, title, lead, source, children }) {
         <h2 id={id + '-t'}>{title}</h2>
         {lead && <p className="sec__lead">{lead}</p>}
       </header>
+      {enlaces[id] && <LinkStrip ids={enlaces[id]} label={`Enlaces oficiales: ${title}`} />}
       {children}
       {source && <p className="src">Fuente: {source}</p>}
     </section>
+  )
+}
+
+/* ── Enlaces externos ─────────────────────────────── */
+export function LinkStrip({ ids, label }) {
+  return (
+    <nav className="lstrip" aria-label={label}>
+      <span className="lstrip__label">Enlaces oficiales</span>
+      <ul>
+        {ids.map((k) => {
+          const l = links[k]
+          return (
+            <li key={k}>
+              <a href={l.u} target="_blank" rel="noreferrer" className={`chip chip--${l.tipo === 'Calculadora' || l.tipo === 'Sistema' ? 'hot' : 'std'}`} title={`${l.t} (${l.e}). Se abre en otra pestaña`}>
+                <span className="chip__ent">{l.e}</span>{l.t}<span className="chip__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+          )
+        })}
+      </ul>
+    </nav>
+  )
+}
+
+export function LinkCard({ k }) {
+  const l = links[k]
+  const host = l.u.replace(/^https?:\/\//, '').replace(/\/.*$/, '')
+  return (
+    <a className={`lcard ${l.tipo === 'Calculadora' || l.tipo === 'Sistema' ? 'lcard--hot' : ''}`} href={l.u} target="_blank" rel="noreferrer">
+      <span className="lcard__top"><span className="lcard__tipo">{l.tipo}</span><span className="lcard__ent">{l.e}</span></span>
+      <span className="lcard__t">{l.t}</span>
+      <span className="lcard__host">{host} <span aria-hidden="true">↗</span><span className="sr"> (se abre en otra pestaña)</span></span>
+    </a>
   )
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Link, Routes, Route, useParams, useLocation, Navigate } from 'react-router-dom'
-import { curso, modulos, docs, m1, m2, m3, m4 } from './data.js'
-import { ViewerProvider, DocCard, usd } from './components.jsx'
+import { curso, modulos, docs, m1, m2, m3, m4, links, enlaces, accesosRapidos, gruposEnlaces } from './data.js'
+import { ViewerProvider, DocCard, LinkCard, usd } from './components.jsx'
 import { Modulo1, Modulo2, Modulo3, Modulo4 } from './modules.jsx'
 
 const VISTAS = { 1: Modulo1, 2: Modulo2, 3: Modulo3, 4: Modulo4 }
@@ -12,6 +12,13 @@ const SECCIONES = {
   4: [['formas', 'Formas de terminación'], ['calculos', 'Cálculo de liquidaciones'], ['pazysalvo', 'Paz y salvo (SIGEL)'], ['gamificacion', 'Gamificación']],
 }
 const ROMAN = ['I', 'II', 'III', 'IV']
+const QUICK_LABEL = {
+  sriLinea: 'SRI en línea', sriConsultaRuc: 'Consulta de RUC', calcLiquidacion: 'Calculadora de liquidaciones',
+  sut: 'SUT (Ministerio del Trabajo)', iessSistema: 'IESS empleadores', senadiServicios: 'SENADI marcas',
+}
+const totalEnlaces = Object.keys(links).length
+// Enlaces únicos de un módulo, en el orden de sus apartados
+const enlacesModulo = (id) => [...new Set(SECCIONES[id].flatMap(([sec]) => enlaces[sec] ?? []))]
 const HEADLINE = {
   1: [usd(m1.resultado.resultado), 'resultado mensual estimado'],
   2: [usd(m2.iva.pagar), 'IVA a pagar del semestre'],
@@ -46,6 +53,15 @@ function Masthead({ onMenu }) {
         <span>{curso.asignatura}</span>
         <span>Ciclo {curso.ciclo.toLowerCase()}</span>
       </div>
+      <nav className="quick" aria-label="Accesos rápidos a sitios oficiales">
+        <span className="quick__label">Accesos rápidos</span>
+        {accesosRapidos.map((k) => (
+          <a key={k} href={links[k].u} target="_blank" rel="noreferrer" title={`${links[k].t} (${links[k].e})`}>
+            {QUICK_LABEL[k] ?? links[k].t} <span aria-hidden="true">↗</span>
+          </a>
+        ))}
+        <Link to="/enlaces" className="quick__all">Todos los enlaces</Link>
+      </nav>
     </header>
   )
 }
@@ -62,6 +78,7 @@ function Sidebar({ open, onClose }) {
       ))}
       <p className="side__group">Repositorio</p>
       <NavLink to="/documentos" className="side__link" onClick={onClose}>Todos los documentos <span className="side__count">{Object.keys(docs).length}</span></NavLink>
+      <NavLink to="/enlaces" className="side__link" onClick={onClose}>Enlaces oficiales <span className="side__count">{totalEnlaces}</span></NavLink>
       <div className="side__foot">
         <img src="/img/learnpro-logo.png" alt="LearnPro" />
         <p>{curso.empresa}<br />Ambato, Tungurahua</p>
@@ -119,6 +136,14 @@ function Inicio() {
         </div>
       </section>
 
+      <section className="quickpanel quickpanel--home" aria-labelledby="accesos">
+        <header className="quickpanel__head">
+          <h2 id="accesos">Accesos rápidos</h2>
+          <p>Las calculadoras y trámites oficiales más usados. <Link to="/enlaces">Ver los {totalEnlaces} enlaces</Link>.</p>
+        </header>
+        <div className="lgrid">{['calcLiquidacion', 'calcTercero', 'calcCuarto', 'sriConsultaRuc', 'sriLinea', 'sriFacturador', 'sut', 'iessSistema', 'senadiServicios'].map((k) => <LinkCard key={k} k={k} />)}</div>
+      </section>
+
       <section className="team" aria-labelledby="equipo">
         <h2 id="equipo">Equipo</h2>
         <ul>
@@ -150,7 +175,15 @@ function Modulo() {
       <nav className="toc" aria-label="Secciones del módulo">
         {SECCIONES[m.id].map(([id, t]) => <a key={id} href={`#${id}`}>{t}</a>)}
         <a href="#trabajos">Documentos</a>
+        <a href="#enlaces-modulo" className="toc__links">Enlaces oficiales</a>
       </nav>
+      <section className="quickpanel" id="enlaces-modulo" aria-labelledby="enlaces-modulo-t">
+        <header className="quickpanel__head">
+          <h2 id="enlaces-modulo-t">Accesos rápidos de este módulo</h2>
+          <p>Sitios oficiales, calculadoras y trámites usados en los trabajos. Cada apartado repite los suyos bajo su título.</p>
+        </header>
+        <div className="lgrid">{enlacesModulo(m.id).map((k) => <LinkCard key={k} k={k} />)}</div>
+      </section>
       <Vista />
       <section className="sec" id="trabajos" aria-labelledby="trabajos-t">
         <header className="sec__head">
@@ -206,6 +239,39 @@ function Documentos() {
   )
 }
 
+function Enlaces() {
+  const [q, setQ] = useState('')
+  const norm = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+  const match = (k) => !q || norm(`${links[k].t} ${links[k].e} ${links[k].tipo} ${links[k].u}`).includes(norm(q))
+  const grupos = gruposEnlaces.map(([g, ks]) => [g, ks.filter(match)]).filter(([, ks]) => ks.length)
+  return (
+    <div className="page">
+      <header className="modhead modhead--plain">
+        <div>
+          <p className="modhead__label">Directorio</p>
+          <h1>Enlaces oficiales</h1>
+          <p className="modhead__lead">Los {totalEnlaces} sitios usados en el semestre: SRI, Ministerio del Trabajo y sus calculadoras, IESS, SENADI, Supercias, aduana y los sistemas del equipo. Todos se abren en otra pestaña.</p>
+        </div>
+      </header>
+      <div className="filters">
+        <nav className="seg" aria-label="Ir a un grupo">
+          {gruposEnlaces.map(([g], i) => <a key={g} href={`#grupo-${i}`}>{g.split(':')[0]}</a>)}
+        </nav>
+        <label className="search"><span className="sr">Buscar enlace</span>
+          <input type="search" placeholder="Buscar: RUC, liquidación, décimo…" value={q} onChange={(e) => setQ(e.target.value)} />
+        </label>
+      </div>
+      {grupos.map(([g, ks]) => (
+        <section key={g} className="sec" id={`grupo-${gruposEnlaces.findIndex(([x]) => x === g)}`}>
+          <header className="sec__head"><h2>{g}</h2></header>
+          <div className="lgrid">{ks.map((k) => <LinkCard key={k} k={k} />)}</div>
+        </section>
+      ))}
+      {!grupos.length && <p className="empty">Ningún enlace coincide con “{q}”. Pruebe con “RUC”, “IVA” o “liquidación”.</p>}
+    </div>
+  )
+}
+
 export default function App() {
   const [menu, setMenu] = useState(false)
   return (
@@ -220,6 +286,7 @@ export default function App() {
             <Route path="/" element={<Inicio />} />
             <Route path="/modulo/:slug" element={<Modulo />} />
             <Route path="/documentos" element={<Documentos />} />
+            <Route path="/enlaces" element={<Enlaces />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           <footer className="foot">

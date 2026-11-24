@@ -293,3 +293,113 @@ export const m4 = {
   },
   hack: [['Grupo 3 Velastegui', '95 / 100', '04:20'], ['Luis Quishpe', '75 / 100', '05:46']],
 }
+
+/* ───────── Enlaces oficiales ───────── */
+// Catálogo de enlaces externos (verificados en noviembre de 2026). `tipo` define la etiqueta visible.
+export const links = {
+  // SRI
+  sriPortal: { t: 'Portal del SRI', u: 'https://www.sri.gob.ec', e: 'SRI', tipo: 'Portal' },
+  sriLinea: { t: 'SRI en línea (declaraciones y trámites)', u: 'https://srienlinea.sri.gob.ec/sri-en-linea/inicio/NAT', e: 'SRI', tipo: 'Trámite' },
+  sriConsultaRuc: { t: 'Consulta de RUC', u: 'https://srienlinea.sri.gob.ec/sri-en-linea/SriRucWeb/ConsultaRuc/Consultas/consultaRuc', e: 'SRI', tipo: 'Consulta' },
+  sriRucSoc: { t: 'Inscripción de RUC para sociedades', u: 'https://www.sri.gob.ec/ruc-sociedades', e: 'SRI', tipo: 'Trámite' },
+  sriRucPN: { t: 'Inscripción de RUC para personas naturales', u: 'https://www.sri.gob.ec/ruc-personas-naturales', e: 'SRI', tipo: 'Trámite' },
+  sriCatastros: { t: 'Catastros del SRI', u: 'https://www.sri.gob.ec/catastros', e: 'SRI', tipo: 'Consulta' },
+  sriDatos: { t: 'Datos abiertos del SRI (catastro del RUC)', u: 'https://www.sri.gob.ec/datasets', e: 'SRI', tipo: 'Consulta' },
+  sriRimpe: { t: 'Régimen RIMPE', u: 'https://www.sri.gob.ec/rimpe', e: 'SRI', tipo: 'Guía' },
+  sriGuia: { t: 'Guía básica tributaria', u: 'https://www.sri.gob.ec/guia-basica-tributaria', e: 'SRI', tipo: 'Guía' },
+  sriIva: { t: 'Impuesto al Valor Agregado (IVA)', u: 'https://www.sri.gob.ec/impuesto-al-valor-agregado-iva', e: 'SRI', tipo: 'Guía' },
+  sriFormularios: { t: 'Formularios e instructivos (104 y 2011)', u: 'https://www.sri.gob.ec/formularios-e-instructivos1', e: 'SRI', tipo: 'Formulario' },
+  sriCalendario: { t: 'Calendario tributario', u: 'https://www.sri.gob.ec/calendario-responsabilidades-tributarias', e: 'SRI', tipo: 'Consulta' },
+  sriFE: { t: 'Facturación electrónica', u: 'https://www.sri.gob.ec/facturacion-electronica', e: 'SRI', tipo: 'Guía' },
+  sriFacturador: { t: 'Facturador SRI (gratuito)', u: 'https://www.sri.gob.ec/facturador-sri', e: 'SRI', tipo: 'Herramienta' },
+  sriComprobantes: { t: 'Comprobantes electrónicos', u: 'https://www.sri.gob.ec/comprobantes-electronicos', e: 'SRI', tipo: 'Guía' },
+  sriValidez: { t: 'Validez de comprobantes electrónicos', u: 'https://srienlinea.sri.gob.ec/comprobantes-electronicos-internet/publico/validezComprobantes.jsf', e: 'SRI', tipo: 'Consulta' },
+  sriEmisores: { t: 'Consulta de emisores autorizados', u: 'https://srienlinea.sri.gob.ec/comprobantes-electronicos-internet/publico/validezEmisor.jsf', e: 'SRI', tipo: 'Consulta' },
+  // Firma electrónica
+  firmaRC: { t: 'Firma electrónica del Registro Civil', u: 'https://www.firmadigital.gob.ec', e: 'Registro Civil', tipo: 'Trámite' },
+  firmaBCE: { t: 'Certificación electrónica del Banco Central', u: 'https://www.eci.bce.ec', e: 'BCE', tipo: 'Trámite' },
+  // Marca
+  senadi: { t: 'Portal del SENADI', u: 'https://www.derechosintelectuales.gob.ec', e: 'SENADI', tipo: 'Portal' },
+  senadiTasas: { t: 'Tasas del SENADI', u: 'https://www.derechosintelectuales.gob.ec/tasas/', e: 'SENADI', tipo: 'Consulta' },
+  senadiServicios: { t: 'Servicios en línea del SENADI (búsqueda fonética y solicitudes)', u: 'https://www.derechosintelectuales.gob.ec/catalogo-de-servicios-web/', e: 'SENADI', tipo: 'Trámite' },
+  niza: { t: 'Clasificación de Niza', u: 'https://www.wipo.int/classifications/nice/es/', e: 'OMPI', tipo: 'Guía' },
+  nizaBuscar: { t: 'Buscador de clases de Niza (NCLPub)', u: 'https://nclpub.wipo.int/es/', e: 'OMPI', tipo: 'Herramienta' },
+  // Comercio exterior
+  senae: { t: 'Aduana del Ecuador (SENAE)', u: 'https://www.aduana.gob.ec', e: 'SENAE', tipo: 'Portal' },
+  ecuapass: { t: 'ECUAPASS y Ventanilla Única', u: 'https://ecuapass.aduana.gob.ec', e: 'SENAE', tipo: 'Trámite' },
+  arcotel: { t: 'Homologación de equipos de telecomunicaciones', u: 'https://www.arcotel.gob.ec/homologacion-de-equipos-de-telecomunicaciones/', e: 'ARCOTEL', tipo: 'Trámite' },
+  arcsa: { t: 'Agencia de Regulación y Control Sanitario', u: 'https://www.controlsanitario.gob.ec', e: 'ARCSA', tipo: 'Portal' },
+  dgac: { t: 'Dirección General de Aviación Civil (drones)', u: 'https://www.aviacioncivil.gob.ec', e: 'DGAC', tipo: 'Portal' },
+  produccion: { t: 'Ministerio de Producción, Comercio Exterior e Inversiones', u: 'https://www.produccion.gob.ec', e: 'MPCEIP', tipo: 'Portal' },
+  // Sociedades y local
+  supercias: { t: 'Superintendencia de Compañías', u: 'https://www.supercias.gob.ec', e: 'Supercias', tipo: 'Portal' },
+  superciasConsulta: { t: 'Consulta de compañías', u: 'https://appscvsgen.supercias.gob.ec/consultaCompanias/societario/busquedaCompanias.jsf', e: 'Supercias', tipo: 'Consulta' },
+  ambato: { t: 'GAD Municipalidad de Ambato (patente municipal)', u: 'https://ambato.gob.ec', e: 'GAD Ambato', tipo: 'Trámite' },
+  bomberos: { t: 'Bomberos de Ambato (permiso de funcionamiento)', u: 'https://bomberosambato.gob.ec', e: 'Bomberos Ambato', tipo: 'Trámite' },
+  // Ministerio del Trabajo
+  mdt: { t: 'Ministerio del Trabajo', u: 'https://www.trabajo.gob.ec', e: 'MDT', tipo: 'Portal' },
+  sut: { t: 'Sistema Único de Trabajo (SUT): contratos, actas de finiquito, décimos y utilidades', u: 'https://sut.trabajo.gob.ec', e: 'MDT', tipo: 'Trámite' },
+  mdtNormativa: { t: 'Biblioteca normativa (Código del Trabajo y acuerdos)', u: 'https://www.trabajo.gob.ec/biblioteca/', e: 'MDT', tipo: 'Guía' },
+  calcPortal: { t: 'Calculadoras del Ministerio del Trabajo', u: 'https://calculadoras.trabajo.gob.ec/', e: 'MDT', tipo: 'Calculadora' },
+  calcLiquidacion: { t: 'Calculadora de liquidaciones', u: 'https://calculadoras.trabajo.gob.ec/liquidaciones', e: 'MDT', tipo: 'Calculadora' },
+  calcTercero: { t: 'Calculadora del décimo tercer sueldo', u: 'https://calculadoras.trabajo.gob.ec/tercero', e: 'MDT', tipo: 'Calculadora' },
+  calcCuarto: { t: 'Calculadora del décimo cuarto sueldo', u: 'https://calculadoras.trabajo.gob.ec/cuarto', e: 'MDT', tipo: 'Calculadora' },
+  calcSalarioDigno: { t: 'Calculadora de la compensación por salario digno', u: 'https://calculadoras.trabajo.gob.ec/salarioDigno', e: 'MDT', tipo: 'Calculadora' },
+  // IESS
+  iess: { t: 'Instituto Ecuatoriano de Seguridad Social', u: 'https://www.iess.gob.ec', e: 'IESS', tipo: 'Portal' },
+  iessEmpleadores: { t: 'Servicios para empleadores (avisos de entrada y salida, planillas)', u: 'https://www.iess.gob.ec/empleadores/', e: 'IESS', tipo: 'Trámite' },
+  iessSistema: { t: 'Sistema de empleadores del IESS', u: 'https://www.iess.gob.ec/empleador-web/pages/principal.jsf', e: 'IESS', tipo: 'Trámite' },
+  iessAfiliacion: { t: 'Solicitud de afiliación', u: 'https://app.iess.gob.ec/iess-gestion-solicitud-afiliado-web/public/pagina.jsf', e: 'IESS', tipo: 'Trámite' },
+  iessTerminacion: { t: 'Resolución sobre terminación de contrato', u: 'https://www.iess.gob.ec/es/web/guest/resolucion-terminacion-de-contrato', e: 'IESS', tipo: 'Guía' },
+  // Justicia
+  esatje: { t: 'Consulta de procesos judiciales (eSATJE)', u: 'https://procesosjudiciales.funcionjudicial.gob.ec', e: 'Función Judicial', tipo: 'Consulta' },
+  funcionJudicial: { t: 'Función Judicial del Ecuador', u: 'https://www.funcionjudicial.gob.ec', e: 'Función Judicial', tipo: 'Portal' },
+  // Emprendimiento y mercado
+  inec: { t: 'Ecuador en cifras (INEC)', u: 'https://www.ecuadorencifras.gob.ec', e: 'INEC', tipo: 'Consulta' },
+  canvas: { t: 'Business Model Canvas (plantilla oficial)', u: 'https://www.strategyzer.com/library/the-business-model-canvas', e: 'Strategyzer', tipo: 'Herramienta' },
+  superprof: { t: 'Superprof Ecuador (competidor)', u: 'https://www.superprof.com.ec', e: 'Competencia', tipo: 'Referencia' },
+  preply: { t: 'Preply (competidor)', u: 'https://preply.com/es/', e: 'Competencia', tipo: 'Referencia' },
+  cfn: { t: 'Corporación Financiera Nacional (créditos)', u: 'https://www.cfn.fin.ec', e: 'CFN', tipo: 'Portal' },
+  banecuador: { t: 'BanEcuador (créditos para emprendedores)', u: 'https://www.banecuador.fin.ec', e: 'BanEcuador', tipo: 'Portal' },
+  // Sistemas del equipo
+  appRoles: { t: 'Sistema de roles de pago LearnPro', u: 'https://learnpro-roles-pago-ecuador.vercel.app/#/', e: 'Equipo LearnPro', tipo: 'Sistema' },
+  appSigel: { t: 'SIGEL: paz y salvo y liquidación', u: 'https://frontend-nine-wine-16.vercel.app/', e: 'Equipo LearnPro', tipo: 'Sistema' },
+}
+
+// Enlaces por apartado (id de sección)
+export const enlaces = {
+  idea: ['inec', 'produccion'],
+  modelo: ['canvas'],
+  plan: ['superprof', 'preply', 'inec', 'superciasConsulta'],
+  economico: ['cfn', 'banecuador', 'supercias'],
+  ruc: ['sriConsultaRuc', 'sriRucSoc', 'sriRucPN', 'sriRimpe', 'sriCatastros', 'sriDatos', 'sriLinea', 'superciasConsulta'],
+  iva: ['sriLinea', 'sriIva', 'sriFormularios', 'sriCalendario', 'sriValidez', 'sriGuia'],
+  'documentos-tributarios': ['sriFacturador', 'sriFE', 'sriComprobantes', 'sriEmisores', 'firmaRC', 'firmaBCE', 'ecuapass', 'senae', 'arcotel', 'arcsa', 'dgac'],
+  marca: ['senadiServicios', 'senadiTasas', 'senadi', 'niza', 'nizaBuscar'],
+  matriz: ['sriLinea', 'sriCalendario', 'senadi', 'ambato', 'bomberos', 'iessEmpleadores', 'mdt', 'supercias'],
+  contratacion: ['sut', 'mdt', 'mdtNormativa', 'iessAfiliacion'],
+  horas: ['mdtNormativa', 'calcPortal'],
+  beneficios: ['calcTercero', 'calcCuarto', 'calcSalarioDigno', 'sut', 'iessEmpleadores'],
+  roles: ['appRoles', 'iessSistema', 'iessEmpleadores', 'calcTercero', 'calcCuarto'],
+  formas: ['mdtNormativa', 'iessTerminacion', 'esatje', 'funcionJudicial'],
+  calculos: ['calcLiquidacion', 'calcTercero', 'calcCuarto', 'calcPortal'],
+  pazysalvo: ['appSigel', 'sut', 'iessEmpleadores', 'calcLiquidacion'],
+  gamificacion: ['mdtNormativa'],
+}
+
+// Accesos rápidos visibles en la cabecera de todas las páginas
+export const accesosRapidos = ['sriLinea', 'sriConsultaRuc', 'calcLiquidacion', 'sut', 'iessSistema', 'senadiServicios']
+
+// Grupos para la página de enlaces
+export const gruposEnlaces = [
+  ['SRI: RUC, IVA y facturación', ['sriPortal', 'sriLinea', 'sriConsultaRuc', 'sriRucSoc', 'sriRucPN', 'sriRimpe', 'sriCatastros', 'sriDatos', 'sriIva', 'sriFormularios', 'sriCalendario', 'sriFE', 'sriFacturador', 'sriComprobantes', 'sriValidez', 'sriEmisores', 'sriGuia']],
+  ['Ministerio del Trabajo: calculadoras y trámites', ['calcLiquidacion', 'calcTercero', 'calcCuarto', 'calcSalarioDigno', 'calcPortal', 'sut', 'mdt', 'mdtNormativa']],
+  ['IESS: seguridad social', ['iessSistema', 'iessEmpleadores', 'iessAfiliacion', 'iessTerminacion', 'iess']],
+  ['Firma electrónica', ['firmaRC', 'firmaBCE']],
+  ['Propiedad intelectual: registro de marca', ['senadiServicios', 'senadiTasas', 'senadi', 'niza', 'nizaBuscar']],
+  ['Compañías, municipio y permisos', ['supercias', 'superciasConsulta', 'ambato', 'bomberos']],
+  ['Comercio exterior e importaciones', ['ecuapass', 'senae', 'arcotel', 'arcsa', 'dgac', 'produccion']],
+  ['Justicia laboral', ['esatje', 'funcionJudicial']],
+  ['Emprendimiento y mercado', ['canvas', 'inec', 'cfn', 'banecuador', 'superprof', 'preply']],
+  ['Sistemas desarrollados por el equipo', ['appRoles', 'appSigel']],
+]
