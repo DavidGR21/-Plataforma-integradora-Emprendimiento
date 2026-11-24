@@ -6,7 +6,7 @@ export const curso = {
   facultad: 'Facultad de Ingeniería en Sistemas, Electrónica e Industrial',
   carrera: 'Software',
   asignatura: 'Emprendimiento y Legislación Laboral',
-  docente: 'Ing. María Francisca Cazorla Logroño, Mg.',
+  docente: 'Eco. María Francisca Cazorla Logroño, Mg.',
   ciclo: 'Julio – diciembre 2026',
   nivel: 'Octavo semestre, paralelo A',
   empresa: 'LearnPro S.A.S.',
